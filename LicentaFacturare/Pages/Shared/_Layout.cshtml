@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LicentaFacturare</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/LicentaFacturare.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-title">
+                Meniu
+            </div>
+
+            <nav class="sidebar-menu">
+                <a asp-area="" asp-page="/Index">Dashboard</a>
+                <a asp-area="" asp-page="/Parteneri/Index">Parteneri</a>
+                <a asp-area="" asp-page="/Produse/Index">Produse</a>
+                <a asp-area="" asp-page="/Facturi/Index">Facturi</a>
+                <a asp-area="" asp-page="/Import/Index">Import</a>
+            </nav>
+        </aside>
+
+        <div class="main-area">
+            <header class="topbar">
+                <div class="topbar-title">
+                    Gestiune facturi si plati
+                </div>
+
+                <div class="login-area">
+                    <partial name="_LoginPartial" />
+                </div>
+            </header>
+
+            <main role="main" class="content">
+                @RenderBody()
+            </main>
+
+            <footer class="app-footer text-muted">
+                &copy; 2026 - Licenta Ghita Vlad-Marian - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            </footer>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

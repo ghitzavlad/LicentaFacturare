@@ -1,0 +1,94 @@
+﻿@page
+@model LicentaFacturare.Pages.Facturi.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalii factura</h1>
+
+<div>
+    <h4>Factura</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.Partener.Denumire)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.Partener.Denumire)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.Serie)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.Serie)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.Numar)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.Numar)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.DataEmitere)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.DataEmitere)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.DataScadenta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.DataScadenta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.TipFactura)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.TipFactura)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.Stare)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.Stare)
+        </dd>
+    </dl>
+</div>
+
+<h4>Linii factura</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Produs</th>
+            <th>Cantitate</th>
+            <th>Pret fara TVA</th>
+            <th>Pret cu TVA</th>
+            <th>Valoare</th>
+            <th>TVA</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var linie in Model.Factura.LinieFactura)
+        {
+            <tr>
+                <td>@linie.Produs?.Denumire</td>
+                <td>@linie.Cantitate</td>
+                <td>@linie.PretUnitarFaraTVA</td>
+                <td>@linie.PretUnitarCuTVA</td>
+                <td>@linie.Valoare</td>
+                <td>@linie.ValoareTVA</td>
+                <td>@linie.TotalLinie</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h5>Total factura: @Model.Factura.LinieFactura.Sum(l => l.TotalLinie)</h5>
+
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Factura.Id" class="btn btn-primary mb-3">Editeaza</a>
+    <a asp-page="./Index">Inapoi la lista</a>
+</div>

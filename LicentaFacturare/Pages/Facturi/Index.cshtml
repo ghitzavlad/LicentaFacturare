@@ -1,0 +1,111 @@
+﻿@page
+@model LicentaFacturare.Pages.Facturi.IndexModel
+@using LicentaFacturare.Models
+
+@{
+    ViewData["Title"] = "Facturi";
+}
+
+<h1>Facturi</h1>
+
+<p>
+    <a asp-page="./Create" class="btn btn-primary mb-3">
+        Adauga factura noua
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nume Partener
+            </th>
+            <th>
+                Serie
+            </th>
+            <th>
+                Numar Factura
+            </th>
+            <th>
+                Data Emitere
+            </th>
+            <th>
+                Data Scadenta
+            </th>
+            <th>
+                Tip Factura
+            </th>
+            <th>
+                Stare
+            </th>
+            <th>
+                Optiuni
+            </th>
+            <th>
+                Printeaza
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Factura) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Partener.Denumire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Serie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numar)
+            </td>
+            <td>
+                 @item.DataEmitere.ToString("dd.MM.yyyy")
+            </td>
+            <td>
+                 @item.DataScadenta.ToString("dd.MM.yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipFactura)
+            </td>
+            <td>
+                    <span class="status-badge status-@item.Stare.ToString().ToLower()">
+                        @item.Stare
+                    </span>
+            </td>
+            <td>
+                    <div class="table-actions">
+                        <a asp-page="./Edit"
+                           asp-route-id="@item.Id"
+                           class="btn btn-sm btn-outline-primary">
+                            Editeaza
+                        </a>
+
+                        <a asp-page="./Details"
+                           asp-route-id="@item.Id"
+                           class="btn btn-sm btn-outline-secondary">
+                            Detalii
+                        </a>
+
+                        @if (item.Stare != LicentaFacturare.Models.StareFactura.Platita)
+                        {
+                            <a asp-page="./Delete"
+                               asp-route-id="@item.Id"
+                               class="btn btn-sm btn-outline-danger">
+                                Sterge
+                            </a>
+                        }
+                    </div>
+            </td>
+            <td>
+                  <div class="table-actions">
+                        <a asp-page="./Index"
+                           asp-page-handler="Pdf"
+                           asp-route-id="@item.Id"
+                           class="btn btn-sm btn-outline-success">
+                            Printeaza PDF
+                        </a>
+                    </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

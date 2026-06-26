@@ -1,0 +1,63 @@
+﻿@page
+@model LicentaFacturare.Pages.Plati.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Plati</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Plata[0].Factura.Serie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plata[0].DataPlata)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plata[0].Suma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plata[0].MetodaPlata)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plata[0].Observatii)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plata[0].IBAN)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Plata) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Factura.Serie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPlata)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Suma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MetodaPlata)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observatii)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IBAN)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

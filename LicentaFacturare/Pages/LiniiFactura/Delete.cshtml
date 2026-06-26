@@ -1,0 +1,72 @@
+﻿@page
+@model LicentaFacturare.Pages.LiniiFactura.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Sterge linie factura</h1>
+
+<h3>Esti sigur ca vrei sa stergi aceasta linie de factura?</h3>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<div>
+    <h4>LinieFactura</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LinieFactura.Factura)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LinieFactura.Factura.Serie)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LinieFactura.Produs)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LinieFactura.Produs.Cod)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LinieFactura.Cantitate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LinieFactura.Cantitate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LinieFactura.PretUnitarFaraTVA)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LinieFactura.PretUnitarFaraTVA)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LinieFactura.PretUnitarCuTVA)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LinieFactura.PretUnitarCuTVA)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LinieFactura.Valoare)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LinieFactura.Valoare)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LinieFactura.ValoareTVA)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LinieFactura.ValoareTVA)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LinieFactura.TotalLinie)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LinieFactura.TotalLinie)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="LinieFactura.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="/Facturi/Edit" asp-route-id="@Model.LinieFactura.FacturaId">Inapoi la editare factura</a>
+    </form>
+</div>

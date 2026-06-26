@@ -1,0 +1,172 @@
+﻿@page
+@model LicentaFacturare.Pages.Facturi.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editeaza factura</h1>
+
+<h4>Factura</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Factura.Id" />
+            <div class="form-group">
+<span class="text-danger">*</span>
+                <label asp-for="Factura.PartenerId" class="control-label"></label>
+                <select asp-for="Factura.PartenerId"
+                        class="form-control"
+                        asp-items="ViewBag.PartenerId">
+                </select>                <span asp-validation-for="Factura.PartenerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+<span class="text-danger">*</span>
+                <label asp-for="Factura.Serie" class="control-label"></label>
+                <input asp-for="Factura.Serie" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Factura.Serie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+<span class="text-danger">*</span>
+                <label asp-for="Factura.Numar" class="control-label"></label>
+                <input asp-for="Factura.Numar" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Factura.Numar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+<span class="text-danger">*</span>
+                <label asp-for="Factura.DataEmitere" class="control-label"></label>
+                <input asp-for="Factura.DataEmitere" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Factura.DataEmitere" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+<span class="text-danger">*</span>
+                <label asp-for="Factura.DataScadenta" class="control-label"></label>
+                <input asp-for="Factura.DataScadenta" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Factura.DataScadenta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+<span class="text-danger">*</span>
+                <label asp-for="Factura.TipFactura" class="control-label"></label>
+                <select asp-for="Factura.TipFactura"
+                        class="form-control"
+                        asp-items="Html.GetEnumSelectList<LicentaFacturare.Models.TipFactura>()">
+                </select>                <span asp-validation-for="Factura.TipFactura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+<span class="text-danger">*</span>
+                <label asp-for="Factura.Stare" class="control-label"></label>
+                <select asp-for="Factura.Stare"
+                        class="form-control"
+                        asp-items="Html.GetEnumSelectList<LicentaFacturare.Models.StareFactura>()">
+                </select>                <span asp-validation-for="Factura.Stare" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<h4>Linii factura</h4>
+
+<p>
+    <a asp-page="/LiniiFactura/Create"
+       asp-route-facturaId="@Model.Factura.Id"
+       class="btn btn-primary">
+        Adauga linie factura
+    </a>
+    <a asp-page="/Plati/Create"
+       asp-route-facturaId="@Model.Factura.Id"
+       class="btn btn-success">
+        Adauga plata
+    </a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Produs</th>
+            <th>Cantitate</th>
+            <th>Pret fara TVA</th>
+            <th>Total</th>
+            <th>Optiuni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var linie in Model.Factura.LinieFactura)
+        {
+            <tr>
+                <td>@linie.Produs?.Denumire</td>
+                <td>@linie.Cantitate</td>
+                <td>@linie.PretUnitarFaraTVA</td>
+                <td>@linie.TotalLinie</td>
+                <td>
+                    <div class="table-actions">
+                        <a asp-page="./Edit"
+                           asp-route-id="@linie.Id"
+                           class="btn btn-sm btn-outline-primary">
+                            Editeaza
+                        </a>
+
+                        <a asp-page="./Details"
+                           asp-route-id="@linie.Id"
+                           class="btn btn-sm btn-outline-secondary">
+                            Detalii
+                        </a>   
+                        
+                        <a asp-page="./Delete"
+                            asp-route-id="@linie.Id"
+                            class="btn btn-sm btn-outline-danger">
+                             Sterge
+                         </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Plati</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Data plata</th>
+            <th>Suma</th>
+            <th>Metoda</th>
+            <th>IBAN</th>
+            <th>Observatii</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var plata in Model.Factura.Plati)
+        {
+            <tr>
+                <td>@plata.DataPlata.ToString("dd.MM.yyyy")</td>
+                <td>@plata.Suma</td>
+                <td>@plata.MetodaPlata</td>
+                <td>@plata.IBAN</td>
+                <td>@plata.Observatii</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var totalFactura = Model.Factura.LinieFactura.Sum(l => l.TotalLinie ?? 0);
+    var totalPlatit = Model.Factura.Plati.Sum(p => p.Suma);
+    var restDePlata = totalFactura - totalPlatit;
+}
+
+<h5>Total factura: @totalFactura</h5>
+<h5>Total platit: @totalPlatit</h5>
+<h5>Rest de plata: @restDePlata</h5>
+<div>
+    <a asp-page="./Index">Inapoi la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

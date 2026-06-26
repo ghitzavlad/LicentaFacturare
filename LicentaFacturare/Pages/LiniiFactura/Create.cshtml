@@ -1,0 +1,44 @@
+﻿@page
+@model LicentaFacturare.Pages.LiniiFactura.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Creaza linie factura noua</h1>
+
+<h4>Linie Factura</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LinieFactura.FacturaId" class="control-label"></label>
+                <input asp-for="LinieFactura.FacturaId" class="form-control bg-light" readonly />
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="LinieFactura.ProdusId" class="control-label"></label>
+                <select asp-for="LinieFactura.ProdusId" class ="form-control" asp-items="ViewBag.ProdusId" aria-required="true"></select>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="LinieFactura.Cantitate" class="control-label"></label>
+                <input asp-for="LinieFactura.Cantitate" class="form-control" aria-required="true"/>
+                <span asp-validation-for="LinieFactura.Cantitate" class="text-danger"></span>
+            </div> 
+            <div class="form-group">
+                <input type="submit" value="Adauga" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Inapoi la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

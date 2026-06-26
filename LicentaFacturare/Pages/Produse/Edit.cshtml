@@ -1,0 +1,53 @@
+﻿@page
+@model LicentaFacturare.Pages.Produse.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editeaza produs</h1>
+
+<h4>Produs</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Produs.Id" />
+            <div class="form-group">
+<span class="text-danger">*</span>
+                <label asp-for="Produs.Cod" class="control-label"></label>
+                <input asp-for="Produs.Cod" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Produs.Cod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+<span class="text-danger">*</span>
+                <label asp-for="Produs.Denumire" class="control-label"></label>
+                <input asp-for="Produs.Denumire" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Produs.Denumire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+<span class="text-danger">*</span>
+                <label asp-for="Produs.Pret" class="control-label"></label>
+                <input asp-for="Produs.Pret" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="Produs.Pret" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Produs.AreTVA" /> @Html.DisplayNameFor(model => model.Produs.AreTVA)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

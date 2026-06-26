@@ -1,0 +1,74 @@
+﻿@page
+@model LicentaFacturare.Pages.LiniiFactura.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editeaza linie factura</h1>
+
+<h4>LinieFactura</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="LinieFactura.Id" />
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="LinieFactura.FacturaId" class="control-label"></label>
+                <select asp-for="LinieFactura.FacturaId" class="form-control" asp-items="ViewBag.FacturaId" aria-required="true"></select>
+                <span asp-validation-for="LinieFactura.FacturaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="LinieFactura.ProdusId" class="control-label"></label>
+                <select asp-for="LinieFactura.ProdusId" class="form-control" asp-items="ViewBag.ProdusId" aria-required="true"></select>
+                <span asp-validation-for="LinieFactura.ProdusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="LinieFactura.Cantitate" class="control-label"></label>
+                <input asp-for="LinieFactura.Cantitate" class="form-control" aria-required="true"/>
+                <span asp-validation-for="LinieFactura.Cantitate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="LinieFactura.PretUnitarFaraTVA" class="control-label"></label>
+                <input asp-for="LinieFactura.PretUnitarFaraTVA" class="form-control" aria-required="true"/>
+                <span asp-validation-for="LinieFactura.PretUnitarFaraTVA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LinieFactura.PretUnitarCuTVA" class="control-label"></label>
+                <input asp-for="LinieFactura.PretUnitarCuTVA" class="form-control" aria-required="true" readonly/>
+                <span asp-validation-for="LinieFactura.PretUnitarCuTVA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LinieFactura.Valoare" class="control-label"></label>
+                <input asp-for="LinieFactura.Valoare" class="form-control" readonly />
+                <span asp-validation-for="LinieFactura.Valoare" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LinieFactura.ValoareTVA" class="control-label"></label>
+                <input asp-for="LinieFactura.ValoareTVA" class="form-control" readonly />
+                <span asp-validation-for="LinieFactura.ValoareTVA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LinieFactura.TotalLinie" class="control-label"></label>
+                <input asp-for="LinieFactura.TotalLinie" class="form-control" readonly />
+                <span asp-validation-for="LinieFactura.TotalLinie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salveaza" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Facturi/Edit" asp-route-id="@Model.LinieFactura.FacturaId">Inapoi la factura</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

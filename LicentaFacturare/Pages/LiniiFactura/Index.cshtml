@@ -1,0 +1,89 @@
+﻿@page
+@model LicentaFacturare.Pages.LiniiFactura.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Linii factura</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LinieFactura[0].Factura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LinieFactura[0].Produs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LinieFactura[0].Cantitate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LinieFactura[0].PretUnitarFaraTVA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LinieFactura[0].PretUnitarCuTVA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LinieFactura[0].Valoare)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LinieFactura[0].ValoareTVA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LinieFactura[0].TotalLinie)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.LinieFactura) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Factura.Serie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produs.Cod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantitate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PretUnitarFaraTVA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PretUnitarCuTVA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valoare)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValoareTVA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalLinie)
+            </td>
+                <td>
+                    <a asp-page="/LiniiFactura/Edit"
+                       asp-route-id="@item.Id"
+                       class="btn btn-sm btn-primary">
+                        Edit
+                    </a>
+
+                    <a asp-page="/LiniiFactura/Details"
+                       asp-route-id="@item.Id"
+                       class="btn btn-sm btn-info">
+                        Details
+                    </a>
+
+                    <a asp-page="/LiniiFactura/Delete"
+                       asp-route-id="@item.Id"
+                       class="btn btn-sm btn-danger">
+                        Delete
+                    </a>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

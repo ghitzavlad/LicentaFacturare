@@ -1,0 +1,49 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Autentificare";
+}
+
+<div class="login-page">
+    <div class="login-card">
+        <h1>Autentificare</h1>
+        <p>Introduceti datele contului pentru a accesa aplicatia.</p>
+
+        <form id="account" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+            <div class="form-group">
+                <label asp-for="Input.Email">Email</label>
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.Password">Parola</label>
+                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-check login-check">
+                <input class="form-check-input" asp-for="Input.RememberMe" />
+                <label class="form-check-label" asp-for="Input.RememberMe">
+                    Tine-ma minte
+                </label>
+            </div>
+
+            <button id="login-submit" type="submit" class="btn btn-primary login-button">
+                Autentificare
+            </button>
+
+            <div class="login-links">
+                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Creeaza cont nou</a>
+                <a asp-page="./ForgotPassword">Ai uitat parola?</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

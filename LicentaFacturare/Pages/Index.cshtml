@@ -1,0 +1,129 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>Dashboard</h1>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card p-3 shadow-sm">
+            <h6>Total facturi</h6>
+            <h3>@Model.TotalFacturi.ToString("0.00") lei</h3>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card p-3 shadow-sm">
+            <h6>Total incasat</h6>
+            <h3>@Model.TotalIncasat.ToString("0.00") lei</h3>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card p-3 shadow-sm">
+            <h6>Rest de incasat</h6>
+            <h3>@Model.RestDeIncasat.ToString("0.00") lei</h3>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card p-3 shadow-sm">
+            <h6>Parteneri</h6>
+            <h3>@Model.TotalParteneri</h3>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card p-3 shadow-sm">
+            <h6>Facturi platite</h6>
+            <h3>@Model.FacturiPlatite</h3>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card p-3 shadow-sm">
+            <h6>Facturi neplatite</h6>
+            <h3>@Model.FacturiNeplatite</h3>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card p-3 shadow-sm">
+            <h6>Produse</h6>
+            <h3>@Model.TotalProduse</h3>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card dashboard-chart-card">
+            <div class="card-body">
+                <h5 class="card-title">Facturi dupa stare</h5>
+                <div class="chart-box">
+                    <canvas id="facturiChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card dashboard-chart-card">
+            <div class="card-body">
+                <h5 class="card-title">Incasari pe luni</h5>
+                <div class="chart-box">
+                    <canvas id="incasariChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const facturiStareCtx = document.getElementById('facturiChart');
+
+        new Chart(facturiStareCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Ciorna', 'Emisa', 'Respinsa', 'Platita'],
+                datasets: [{
+                    data: [
+                        @Model.FacturiCiorna,
+                        @Model.FacturiEmise,
+                        @Model.FacturiRespinse,
+                        @Model.FacturiPlatite
+                    ],
+                    backgroundColor: [
+                        '#6c757d',
+                        '#0d6efd',
+                        '#dc3545',
+                        '#198754'
+                    ]
+                }]
+            }
+        });
+
+        const incasariCtx = document.getElementById('incasariChart');
+
+        new Chart(incasariCtx, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.LuniIncasari)),
+                datasets: [{
+                    label: 'Incasari',
+                    data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ValoriIncasari))
+                }]
+            }
+        });
+    </script>
+}

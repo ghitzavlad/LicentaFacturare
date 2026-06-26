@@ -1,0 +1,18 @@
+﻿@page
+@model AccessDeniedModel
+
+@{
+    ViewData["Title"] = "Acces restrictionat";
+}
+
+<div class="login-page">
+    <div class="login-card">
+        <h1>Acces restrictionat</h1>
+        <p>Nu aveti permisiunea necesara pentru a accesa aceasta pagina.</p>
+
+        <div class="login-links">
+            <a asp-area="" asp-page="/Index">Inapoi la dashboard</a>
+            <a asp-page="./Login">Autentificare</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+﻿@page
+@model LicentaFacturare.Pages.Parteneri.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Parteneri</h1>
+
+<p>
+    <a asp-page="./Create" class="btn btn-primary mb-3">
+        Adauga partener nou
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].Cod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].Denumire)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].CnpCodFiscal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].NrRegComertului)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].Tara)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].Judet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].Localitate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].Adresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].ContBancar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Partener[0].TipPartener)
+            </th>
+            <th>
+                Optiuni
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Partener) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Denumire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CnpCodFiscal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NrRegComertului)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tara)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Judet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Localitate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContBancar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipPartener)
+            </td>
+            <td>
+                    <div class="table-actions">
+                        <a asp-page="./Edit"
+                           asp-route-id="@item.Id"
+                           class="btn btn-sm btn-outline-primary">
+                            Editeaza
+                        </a>
+
+                        <a asp-page="./Details"
+                           asp-route-id="@item.Id"
+                           class="btn btn-sm btn-outline-secondary">
+                            Detalii
+                        </a>
+
+                        <a asp-page="./Delete"
+                           asp-route-id="@item.Id"
+                           class="btn btn-sm btn-outline-danger">
+                            Sterge
+                        </a>
+                    </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

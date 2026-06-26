@@ -1,0 +1,64 @@
+﻿@page
+@model LicentaFacturare.Pages.Facturi.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Sterge factura</h1>
+
+<h3>Esti sigur ca vrei sa stergi aceasta factura?</h3>
+<div>
+    <h4>Factura</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.Partener)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.Partener.CnpCodFiscal)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.Serie)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.Serie)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.Numar)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.Numar)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.DataEmitere)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.DataEmitere)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.DataScadenta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.DataScadenta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.TipFactura)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.TipFactura)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Factura.Stare)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Factura.Stare)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Factura.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger mb-3"  /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

@@ -1,0 +1,101 @@
+﻿@page
+@model LicentaFacturare.Pages.Import.IndexModel
+
+<h1>Import plati ISO 20022</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Selecteaza fisier XML</label>
+        <input asp-for="FisierXml" type="file" class="form-control" accept=".xml" />
+        <span asp-validation-for="FisierXml" class="text-danger"></span>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">
+        Preview import
+    </button>
+</form>
+
+@if (Model.PlatiPreview.Any())
+{
+    <hr />
+
+    <h4>Preview plati gasite</h4>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <form method="post" asp-page-handler="Import">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Importa</th>
+                    <th>Data</th>
+                    <th>Suma</th>
+                    <th>Factura</th>
+                    <th>IBAN</th>
+                    <th>Observatii</th>
+                    <th>Metoda</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.PlatiPreview.Count; i++)
+                {
+                    <tr>
+                        <input type="hidden" asp-for="PlatiPreview[i].Referinta" />
+                        <input type="hidden" asp-for="PlatiPreview[i].FacturaText" />
+                        <td>
+                            <input asp-for="PlatiPreview[i].Selectata" />
+                        </td>
+
+                        <td>
+                            <input asp-for="PlatiPreview[i].DataPlata"
+                                   type="date"
+                                   class="form-control" />
+                        </td>
+
+                        <td>
+                            <input asp-for="PlatiPreview[i].Suma"
+                                   class="form-control"
+                                   type="number"
+                                   step="0.01" />
+                        </td>
+
+                        <td>
+                            <select asp-for="PlatiPreview[i].FacturaId"
+                                    class="form-control"
+                                    asp-items="Model.FacturiList">
+                                <option value="">-- Selecteaza factura --</option>
+                            </select>
+                        </td>
+
+                        <td>
+                            <input asp-for="PlatiPreview[i].IBAN"
+                                   class="form-control" />
+                        </td>
+
+                        <td>
+                            <input asp-for="PlatiPreview[i].Observatii"
+                                   class="form-control" />
+                        </td>
+
+                        <td>
+                            <select asp-for="PlatiPreview[i].MetodaPlata"
+                                    class="form-control"
+                                    asp-items="Html.GetEnumSelectList<LicentaFacturare.Models.MetodaPlata>()">
+                            </select>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-success">
+            Importa selectate
+        </button>
+    </form>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

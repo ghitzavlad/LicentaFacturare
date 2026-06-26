@@ -1,0 +1,55 @@
+﻿@page
+@model LicentaFacturare.Pages.Plati.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalii plati</h1>
+
+<div>
+    <h4>Plata</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plata.Factura)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Plata.Factura.Serie)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plata.DataPlata)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Plata.DataPlata)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plata.Suma)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Plata.Suma)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plata.MetodaPlata)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Plata.MetodaPlata)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plata.Observatii)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Plata.Observatii)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plata.IBAN)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Plata.IBAN)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Plata.Id">Editeaza</a> |
+    <a asp-page="/Facturi/Edit" asp-route-id="@Model.Plata.FacturaId">Inapoi la factura</a>
+</div>

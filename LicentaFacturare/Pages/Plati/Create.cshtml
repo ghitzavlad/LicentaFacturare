@@ -1,0 +1,63 @@
+﻿@page
+@model LicentaFacturare.Pages.Plati.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Adauga plata noua</h1>
+
+<h4>Plata</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Plata.FacturaId" class="control-label"></label>
+                <input value="@ViewData["FacturaAfisare"]" class="form-control" readonly />
+                <input type="hidden" asp-for="Plata.FacturaId" />
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Plata.DataPlata" class="control-label"></label>
+                <input asp-for="Plata.DataPlata" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Plata.DataPlata" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Plata.Suma" class="control-label"></label>
+                <input asp-for="Plata.Suma" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Plata.Suma" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Plata.MetodaPlata" class="control-label"></label>
+                <select asp-for="Plata.MetodaPlata" class="form-control" asp-items="Html.GetEnumSelectList<LicentaFacturare.Models.MetodaPlata>()"> </select>
+                <span asp-validation-for="Plata.MetodaPlata" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Plata.Observatii" class="control-label"></label>
+                <input asp-for="Plata.Observatii" class="form-control" />
+                <span asp-validation-for="Plata.Observatii" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Plata.IBAN" class="control-label"></label>
+                <input asp-for="Plata.IBAN" class="form-control" />
+                <span asp-validation-for="Plata.IBAN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Adauga" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Inapoi la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
