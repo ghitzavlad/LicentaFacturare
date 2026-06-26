@@ -21,6 +21,7 @@ namespace LicentaFacturare.Models
         [Required]
         [Display(Name = "Data Emitere")]
         public DateTime DataEmitere { get; set; } = DateTime.Today;
+        /* test comment dupa push pe git*/
 
         [Required]
         [Display(Name = "Data Scadenta")]
