@@ -104,19 +104,19 @@
                 <td>@linie.TotalLinie</td>
                 <td>
                     <div class="table-actions">
-                        <a asp-page="./Edit"
+                        <a asp-page="/LiniiFactura/Edit"
                            asp-route-id="@linie.Id"
                            class="btn btn-sm btn-outline-primary">
                             Editeaza
                         </a>
 
-                        <a asp-page="./Details"
+                        <a asp-page="/LiniiFactura/Details"
                            asp-route-id="@linie.Id"
                            class="btn btn-sm btn-outline-secondary">
                             Detalii
                         </a>   
                         
-                        <a asp-page="./Delete"
+                        <a asp-page="/LiniiFactura/Delete"
                             asp-route-id="@linie.Id"
                             class="btn btn-sm btn-outline-danger">
                              Sterge
